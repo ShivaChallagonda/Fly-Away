@@ -1,6 +1,5 @@
 package entityclasses;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,21 +12,21 @@ import javax.persistence.Table;
 import com.util.HibernateSessionUtil;
 
 @Entity
-@Table(name="user_data")
+@Table(name = "user_data")
 public class user {
-	public static boolean usersesion=false;
+	public static boolean usersesion = false;
 	// properties
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
+
 	private double balance;
 
 	public int getId() {
@@ -53,22 +52,24 @@ public class user {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public user() {
-		
+
 	}
-	public user(int id, String name, String password,double balance) {
+
+	public user(int id, String name, String password, double balance) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.balance=balance;
+		this.balance = balance;
 		this.password = password;
 	}
-	
+
 	public user(String name, String password, double b) {
 
 		this.name = name;
 		this.password = password;
-		balance=b;
+		balance = b;
 	}
 
 	public double getBalance() {
@@ -78,6 +79,5 @@ public class user {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	
-	
+
 }

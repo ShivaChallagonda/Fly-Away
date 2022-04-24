@@ -27,47 +27,47 @@ import com.util.HibernateSessionUtil;
 import entityclasses.*;
 
 @WebServlet("/userbooking")
-public class userbooking extends HttpServlet{
+public class userbooking extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		request.getRequestDispatcher("options.html").include(request, response);
-		int flightnumber=Integer.parseInt(request.getParameter("flightnumber"));
-		HttpSession ss=request.getSession(false);
-		if(ss!=null) {
-		
-		try {
-			// 1. build hibernate session factory
-			SessionFactory factory = HibernateSessionUtil.buildSessionFactory();
-			
-			// 2. create session object
-			Session session = factory.openSession();
-			
-			// 3. read products
-			List<flight> obj = session.createQuery("from flight").list();
-			
-			for(flight p : obj) {
-				if(p.getId()==flightnumber) {
-					ss.setAttribute("idvalue", p.getId());
-					ss.setAttribute("flightname",p.getAirline());
-					ss.setAttribute("sourceplace", p.getSource());
-					ss.setAttribute("destinationplace", p.getDestination());
-					response.sendRedirect("payment.html");
-				}
-			}
+		int flightnumber = Integer.parseInt(request.getParameter("flightnumber"));
+		HttpSession ss = request.getSession(false);
+		if (ss != null) {
 
-			// 3. close session
-			session.close();
-		
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			try {
+				// 1. build hibernate session factory
+				SessionFactory factory = HibernateSessionUtil.buildSessionFactory();
+
+				// 2. create session object
+				Session session = factory.openSession();
+
+				// 3. read products
+				List<flight> obj = session.createQuery("from flight").list();
+
+				for (flight p : obj) {
+					if (p.getId() == flightnumber) {
+						ss.setAttribute("idvalue", p.getId());
+						ss.setAttribute("flightname", p.getAirline());
+						ss.setAttribute("sourceplace", p.getSource());
+						ss.setAttribute("destinationplace", p.getDestination());
+						response.sendRedirect("payment.html");
+					}
+				}
+
+				// 3. close session
+				session.close();
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }
